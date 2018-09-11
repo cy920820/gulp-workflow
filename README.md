@@ -3,6 +3,8 @@
 针对不同的开发环境进行自动化流式构建
 
 ## 项目目录结构
+
+```shell
 .
 ├── README.md
 ├── config
@@ -12,6 +14,7 @@
 │   └── gulp.prod.js
 ├── gulpfile.js
 └── package.json
+```
 
 ## 开发流程
 
@@ -37,7 +40,7 @@ yarn run init
 yarn start
 ```
 
-本地构建打包
+生产上线
 ```
 yarn build
 ```
