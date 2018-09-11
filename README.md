@@ -49,3 +49,6 @@ yarn build
 ```
 yarn lint --fix
 ```
+
+## 协议
+MIT
