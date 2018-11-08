@@ -1,4 +1,5 @@
 /**
+ * @author cuiyang
  * gulp 生产环境
  * prod build：
  *  1. 文件压缩 - 针对js、css、img分别进行uglify, minify, compress
