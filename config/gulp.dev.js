@@ -1,4 +1,5 @@
 /**
+ * @author cuiyang
  * gulp 开发环境
  * dev build：
  *  1. 便于调试 - 加入sourcemap，映射源文件
