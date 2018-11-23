@@ -8,7 +8,6 @@
 
 const gulp = require('gulp')
 const stylus = require('gulp-stylus')
-const eslint = require('gulp-eslint')
 const imagemin = require('gulp-imagemin')
 const browserSync = require('browser-sync').create()
 const reload = browserSync.reload
@@ -67,11 +66,21 @@ function dev() {
   gulp.task('js:dev', function () {
     return gulp.src(config.js.src)
     .pipe(sourcemaps.init())
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError())
     .pipe(sourcemaps.write('../maps'))
     .pipe(gulp.dest(config.js.dist))
+    .pipe(reload({
+      stream: true
+    }))
+  })
+
+  /**
+  * vendor处理
+  */
+  gulp.task('vendor:dev', function () {
+    return gulp.src(config.vendor.src)
+    .pipe(sourcemaps.init())
+    .pipe(sourcemaps.write('../maps'))
+    .pipe(gulp.dest(config.vendor.dist))
     .pipe(reload({
       stream: true
     }))
@@ -94,7 +103,7 @@ function dev() {
   })
 
   // 开启本地服务
-  gulp.task('dev', ['html:dev', 'css:dev', 'stylus:dev', 'js:dev', 'images:dev'], function () {
+  gulp.task('dev', ['html:dev', 'css:dev', 'stylus:dev', 'js:dev', 'vendor:dev', 'images:dev'], function () {
     browserSync.init({
       server: {
         baseDir: config.dist // 服务根目录
@@ -113,6 +122,8 @@ function dev() {
     gulp.watch(config.assets.src, ['assets:dev'])
     // Watch .js files
     gulp.watch(config.js.src, ['js:dev'])
+    // Watch .js files
+    gulp.watch(config.vendor.src, ['vendor:dev'])
     // Watch image files
     gulp.watch(config.img.src, ['images:dev'])
   })

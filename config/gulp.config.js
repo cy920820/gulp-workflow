@@ -5,12 +5,12 @@
 
 const SRC_DIR = './src/'
 const DIST_DIR = './dist/'
-const DIST_FILES = DIST_DIR + '**'
+// const DIST_FILES = DIST_DIR + '**'
 
 module.exports = {
   src: SRC_DIR,
   dist: DIST_DIR,
-  dist_files: DIST_FILES,
+  // dist_files: DIST_FILES,
   html: {
     dir: SRC_DIR,
     src: SRC_DIR + '*.html',
@@ -31,8 +31,14 @@ module.exports = {
 
   js: {
     dir: SRC_DIR + 'js',
-    src: SRC_DIR + 'js/**/*.js',
+    src: SRC_DIR + 'js/*.js',
     dist: DIST_DIR + 'js'
+  },
+
+  vendor: {
+    dir: SRC_DIR + 'js/vendor',
+    src: SRC_DIR + 'js/vendor/**/*.js',
+    dist: DIST_DIR + 'js/vendor'
   },
 
   img: {

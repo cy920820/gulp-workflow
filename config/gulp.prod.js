@@ -14,7 +14,6 @@ const stylus = require('gulp-stylus')
 const autoprefixer = require('gulp-autoprefixer')
 const minifyCss = require('gulp-minify-css')
 const babel = require('gulp-babel')
-const eslint = require('gulp-eslint')
 const uglify = require('gulp-uglify')
 const imagemin = require('gulp-imagemin')
 const config = require('./gulp.config.js')
@@ -90,14 +89,23 @@ function prod() {
    */
   gulp.task('js:prod', function () {
     return gulp.src(config.js.src)
-    .pipe(eslint()).pipe(eslint.format())
-    .pipe(eslint.failAfterError())
     .pipe(babel())
     .pipe(uglify())
     .pipe(rev())
     .pipe(gulp.dest(config.js.dist))
     .pipe(rev.manifest('js.manifest.json'))
     .pipe(gulp.dest(config.js.dist))
+  })
+
+  /**
+  * vendor处理：合并、压缩
+  */
+  gulp.task('vendor:prod', function () {
+    return gulp.src(config.vendor.src)
+    .pipe(rev())
+    .pipe(gulp.dest(config.vendor.dist))
+    .pipe(rev.manifest('vendor.manifest.json'))
+    .pipe(gulp.dest(config.vendor.dist))
   })
 
   /**
@@ -115,7 +123,7 @@ function prod() {
     .pipe(gulp.dest(config.img.dist))
   })
 
-  gulp.task('prod', gulpSequence('clean', 'images:prod', 'css:prod', 'stylus:prod', 'js:prod', 'assets:prod', 'html:prod'))
+  gulp.task('prod', gulpSequence('clean', 'images:prod', 'css:prod', 'stylus:prod', 'js:prod', 'vendor:prod', 'assets:prod', 'html:prod'))
 }
 
 module.exports = prod
