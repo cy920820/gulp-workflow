@@ -1,9 +1,11 @@
 /**
  * @author cuiyang
- * gulp 生产环境
+ * @environment production
  * prod build：
- *  1. 文件压缩 - 针对js、css、img分别进行uglify, minify, compress
- *  2. 加版本号 - 加hash编码，并自动替换原始路径
+ *  1. 文件压缩 - 针对js、css、img、html分别进行uglify, minify, compress, htmlmin
+ *  2. 缓存处理 - 加hash编码，并自动替换原始路径
+ *  3. style 预处理 autoprefixer
+ *  4. babel es2015
  */
 
 const gulp = require('gulp')
@@ -102,6 +104,7 @@ function prod() {
   */
   gulp.task('vendor:prod', function () {
     return gulp.src(config.vendor.src)
+    .pipe(uglify())
     .pipe(rev())
     .pipe(gulp.dest(config.vendor.dist))
     .pipe(rev.manifest('vendor.manifest.json'))

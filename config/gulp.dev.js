@@ -1,6 +1,6 @@
 /**
  * @author cuiyang
- * gulp 开发环境
+ * @environment development
  * dev build：
  *  1. 便于调试 - 加入sourcemap，映射源文件
  *  2. 提高开发效率 - 加入livereload，实现文件监控，自动化编译

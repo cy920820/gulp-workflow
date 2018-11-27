@@ -1,4 +1,4 @@
-# gulp工作流
+# gulp-development-template
 > gulp - 自动化构建工具
 
 > 特点：
