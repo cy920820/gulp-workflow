@@ -12,7 +12,7 @@ module.exports = {
   // dist_files: DIST_FILES,
   html: {
     dir: SRC_DIR,
-    src: SRC_DIR + '*.html',
+    src: SRC_DIR + '**/*.html',
     dist: DIST_DIR
   },
 
