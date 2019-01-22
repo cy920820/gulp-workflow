@@ -29,7 +29,7 @@
 克隆项目到本地
 
 ```shell
-git clone git@github.com:Cui-y/gulp-work.git my-project
+git clone git@github.com:cy920820/gulp-workflow.git my-project
 cd my-project
 rm -rf .git
 ```
