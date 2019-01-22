@@ -31,6 +31,7 @@
 ```shell
 git clone git@github.com:Cui-y/gulp-work.git my-project
 cd my-project
+rm -rf .git
 ```
 
 安装依赖
