@@ -13,6 +13,8 @@ const browserSync = require('browser-sync').create()
 const reload = browserSync.reload
 const config = require('./gulp.config')
 const sourcemaps = require('gulp-sourcemaps')
+const postcss = require('gulp-postcss')
+const adaptive = require('postcss-adaptive')
 
 function dev() {
   /**
@@ -52,8 +54,15 @@ function dev() {
    * stylus样式处理
    */
   gulp.task('stylus:dev', function () {
+    const processors = [adaptive({
+      remUnit: 50,
+      hairlineClass: 'hairlines',
+      autoRem: true
+    })]
+
     return gulp.src(config.stylus.src)
     .pipe(stylus())
+    .pipe(postcss(processors))
     .pipe(gulp.dest(config.stylus.dist))
     .pipe(reload({
       stream: true

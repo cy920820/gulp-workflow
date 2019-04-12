@@ -21,6 +21,8 @@ const imagemin = require('gulp-imagemin')
 const config = require('./gulp.config.js')
 const del = require('del')
 const gulpSequence = require('gulp-sequence') // 顺序执行gulp任务流
+const postcss = require('gulp-postcss')
+const adaptive = require('postcss-adaptive')
 
 function prod() {
   /**
@@ -73,12 +75,19 @@ function prod() {
    * stylus样式处理
    */
   gulp.task('stylus:prod', function () {
+    const processors = [adaptive({
+      remUnit: 50,
+      hairlineClass: 'hairlines',
+      autoRem: true
+    })]
+
     return gulp.src(['dist/images/*.json', config.stylus.src])
     .pipe(revCollector({
       replaceReved: true
     }))
     .pipe(stylus())
     .pipe(autoprefixer('last 2 version'))
+    .pipe(postcss(processors))
     .pipe(minifyCss()) // 压缩
     .pipe(rev())
     .pipe(gulp.dest(config.stylus.dist))
