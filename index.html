@@ -3,12 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <!-- DNS预加载：是否开启 -->
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <!-- 需要预加载的域名 -->
+  <!-- <link rel="dns-prefetch" href="//xx.bbtfax.com"> -->
+  <!-- ie兼容模式：兼容最新版渲染引擎 -->
   <meta http-equiv="X-UA-Compatible" content="ie=edge, chrome=1">
+  <!-- cps安全策略 -->
   <meta http-equiv="Content-Security-policy" content="script-src 'self' *.url.cn 'unsafe-inline' 'unsafe-eval'">
+  <!-- 类型检测 -->
   <meta name="format-detection" content="telephone=no, email=no">
   <meta name="keywords" content="xxx">
   <meta name="description" content="xxx">
   <title>Document</title>
+  <!-- 移动端适配方案 -->
+  <script type="text/javascript">
+    (function(doc, win) {
+      let docEl = doc.documentElement
+      let resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize'
+
+      function setRemUnit () {
+        let vw = docEl.clientWidth
+        if (!vw) return
+        docEl.style.fontSize = 100 * (vw / 750) + 'px'
+        if (vw > 750) {
+          docEl.style.fontSize = 50 + 'px'
+        }
+      }
+
+      setRemUnit()
+
+      if (!doc.addEventListener) return 
+      win.addEventListener(resizeEvt, setRemUnit, false)
+      doc.addEventListener('DOMContentLoaded', setRemUnit, false)
+
+      // 0.5px hairlines
+      if (win.devicePixelRatio && win.devicePixelRatio >= 2) {
+        const fakebody = doc.createElement('body')
+        const testdiv = doc.createElement('div')
+        testdiv.style.border = '0.5px solid transparent'
+        fakebody.appendChild(testdiv)
+        docEl.appendChild(fakebody)
+        if (testdiv.offsetHeight === 1) {
+          docEl.classList.add('hairlines')
+        }
+        docEl.removeChild(fakebody)
+      }
+
+    })(document, window)
+  </script>
 </head>
 <body>
   
